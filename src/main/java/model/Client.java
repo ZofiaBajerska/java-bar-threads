@@ -22,7 +22,7 @@ public class Client implements Runnable {
                 System.out.println(name + " " + drink);
                 sleep(1000 * drink.length());
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                // e.printStackTrace();
                 break;
             }
 
