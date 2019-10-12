@@ -7,7 +7,7 @@ import java.util.TreeMap;
 
 public class Main {
     public static void main(String[] args) {
-        Bar bar = new Bar();
+        Bar bar = new Bar(true);
         Barman barman = new Barman(bar);
         barman.loadMenuFromFile("menu.txt");
         Client[]  clients= new Client[5];

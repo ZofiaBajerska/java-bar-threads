@@ -1,17 +1,30 @@
 package environment;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class Bar {
-    private String value = null;
-        public synchronized String take() throws InterruptedException {
-            while (value == null) {
-                wait();
-            }
-            String drink = value;
-            value = null;
-            return drink;
-        }
-        public synchronized void put(String value) {
-            this.value = value;
-            notifyAll();
-        }
+    private Queue<String> drinks;
+    private boolean multiple;
+
+    public Bar(boolean multiple) {
+        drinks = new LinkedList<String>();
+        this.multiple = multiple;
     }
+
+    public synchronized String take() throws InterruptedException {
+        while (drinks.isEmpty()) {
+            wait();
+        }
+        String drink = drinks.poll();
+        return drink;
+    }
+    public synchronized void put(String value) {
+        if (!multiple){
+            drinks.clear();
+        }
+        drinks.offer(value);
+        System.out.println("drinks waiting: " + drinks.size()); // sprawdzenie czy dostawia drinki!
+        notifyAll();
+    }
+}
