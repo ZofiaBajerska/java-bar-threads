@@ -9,15 +9,34 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Barman class with txt menu for drink management.
+ *
+ * @author Zofia B.
+ */
 public class Barman implements Runnable{
-        private Bar bar;
-        private ArrayList<String> menu = new ArrayList<String>();
+    /**
+     * Reference to a bar where Barman is putting drinks on.
+      */
+    private Bar bar;
+    /**
+     * List of the drinks to put on a bar read from a file.
+     */
+    private ArrayList<String> menu = new ArrayList<String>();
 
-        public Barman(Bar bar) {
-            this.bar = bar;
-        }
+    /**
+     * Constructor for the class.
+     *
+     * @param bar reference to a bar where Barman is putting drinks on.
+     */
+    public Barman(Bar bar) {
+        this.bar = bar;
+    }
 
     @Override
+    /**
+     * Method that is running in a Thread putting a drink every 2 sek from menu.
+     */
     public void run() {
         Random random = new Random();
         while (true) {
@@ -31,18 +50,24 @@ public class Barman implements Runnable{
             bar.put(drink);
         }
     }
+
+    /**
+     * Method which is reading menu from file.
+     *
+     * @param file name of txt file with menu in it.
+     */
+
     public void loadMenuFromFile (String file) {
         try {
             Reader freader = new FileReader(file);
-
             BufferedReader breader = new BufferedReader(freader);
             String line;
-            while ((line = breader.readLine()) !=null){
+
+            while ((line = breader.readLine()) != null){
                 menu.add(line);
             }
             freader.close();
         } catch (IOException e) {
         }
     }
-
 }
