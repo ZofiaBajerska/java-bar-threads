@@ -2,6 +2,7 @@ package environment;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.logging.Logger;
 
 /**
  * Bar class for drink management.
@@ -9,6 +10,11 @@ import java.util.Queue;
  * @author Zofia B.
  */
 public class Bar {
+    /**
+     * Logger for logging unusual situation and errors.
+     */
+    private static final Logger log = Logger.getLogger(Bar.class.getName());
+
     /**
      * Collection for storing drinks put by Barman and waiting to be taken by Client.
      */

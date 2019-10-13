@@ -2,6 +2,9 @@ package model;
 
 import environment.Bar;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import static java.lang.Thread.*;
 
 /**
@@ -10,6 +13,10 @@ import static java.lang.Thread.*;
  * @author Zofia B.
  */
 public class Client implements Runnable {
+    /**
+     * Logger for logging unusual situation and errors.
+     */
+    private static final Logger log = Logger.getLogger(Client.class.getName());
     /**
      * Reference to bar from which the Client is taking the drinks.
      */
@@ -29,10 +36,10 @@ public class Client implements Runnable {
         this.name = name;
     }
 
-    @Override
     /**
      * Method that is running in a Thread taking drink from a bar and consuming  it as many seconds as the name length.
      */
+    @Override
     public void run() {
         while (true) {
             try {
@@ -40,7 +47,7 @@ public class Client implements Runnable {
                 System.out.println(name + " " + drink);
                 sleep(1000 * drink.length());
             } catch (InterruptedException e) {
-                // e.printStackTrace();
+                log.log(Level.WARNING, e.getMessage(), e);
                 break;
             }
         }

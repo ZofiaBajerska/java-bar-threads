@@ -3,6 +3,8 @@ import model.Barman;
 import model.Client;
 
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Aplication Main class
@@ -10,6 +12,12 @@ import java.util.Scanner;
  * @author Zofia B.
  */
 public class Main {
+
+    /**
+     * Logger for logging unusual situation and errors.
+     */
+    private static final Logger log = Logger.getLogger(Main.class.getName());
+
     /**
      * Application main method.
      *
@@ -37,6 +45,7 @@ public class Main {
                 threads[i].interrupt();
                 threads[i].join();
             } catch (InterruptedException e){
+                log.log(Level.WARNING, e.getMessage(), e);
             }
         }
     }
